@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
  * @param <T> the type of items stored in this repository
  */
 public class Repository<T> {
-    // TODO: Add a private final List field called items that stores items of type T.
+    private final List<T> items;
     /**
      * Constructs a new empty repository.
      */
     public Repository() {
-        // TODO: Initialize the items field with a new ArrayList.
+        this.items = new ArrayList<>();
     }
 
     /**
@@ -26,10 +26,13 @@ public class Repository<T> {
      * @throws IllegalArgumentException if the item is null
      */
     public boolean add(T item) {
-        // TODO: Throw an IllegalArgumentException with the message "Item cannot be null" if the item is null.
-
-        // TODO: Add the item to the items list and return the result.
-        throw new UnsupportedOperationException("Method not implemented");
+        if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null");
+        }
+        if (!items.contains(item)) {
+            return items.add(item);
+        }
+        return false;
     }
 
     /**
@@ -38,8 +41,7 @@ public class Repository<T> {
      * @return true if the item was removed successfully
      */
     public boolean remove(T item) {
-        // TODO: Remove the item from the items list and return the result.
-        throw new UnsupportedOperationException("Method not implemented");
+        return items.remove(item);
     }
 
     /**
@@ -52,8 +54,7 @@ public class Repository<T> {
         if (predicate == null) {
             throw new IllegalArgumentException("Predicate cannot be null");
         }
-        // TODO:  Return a list of items using stream().filter(predicate).collect(Collectors.toList()) on the items list.
-        throw new UnsupportedOperationException("Method not implemented");
+        return items.stream().filter(predicate).collect(Collectors.toList());
     }
 
     /**
@@ -61,8 +62,7 @@ public class Repository<T> {
      * @return an unmodifiable list of all items
      */
     public List<T> getAll() {
-        // TODO: Return an unmodifiable list of items using Collections.unmodifiableList(items).
-        throw new UnsupportedOperationException("Method not implemented");
+        return Collections.unmodifiableList(items);
     }
 
     /**
@@ -70,8 +70,7 @@ public class Repository<T> {
      * @return the count of items
      */
     public int count() {
-        // TODO: Return the size of the items list.
-        throw new UnsupportedOperationException("Method not implemented");
+       return items.size();
     }
 
     /**
@@ -80,7 +79,6 @@ public class Repository<T> {
      * @return true if the repository contains the item
      */
     public boolean contains(T item) {
-        // TODO: Return true if the items list contains the item.
-        throw new UnsupportedOperationException("Method not implemented");
+        return items.contains(items);
     }
 }
